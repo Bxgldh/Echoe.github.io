@@ -1,18 +1,29 @@
-var audio = document.getElementById('audio');
-audio.play();
-var lis = document.querySelectorAll('ul.jj li');
-lis.forEach(li => {
-    li.onclick = function() {
-        audio.src = './res/' + this.getAttribute('m') + '.mp3';
-        audio.play();
-        console.log(this.innerHTML)
-    }
-});
-document.querySelector('.s1').onclick = function() {
-    audio.currentTime = 0;
-    console.log('重开')
-};
-document.querySelector('.s2').onclick = function() {
-    audio.pause();
-    console.log('停止')
-}
+(function() {
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  var card = $('card'),
+      openB = $('open'),
+      closeB = $('close'),
+      timer = null;
+  console.log('wat', card);
+  openB.addEventListener('click', function () {
+    card.setAttribute('class', 'open-half');
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(function () {
+      card.setAttribute('class', 'open-fully');
+      timer = null;
+    }, 1000);
+  });
+
+  closeB.addEventListener('click', function () {
+    card.setAttribute('class', 'close-half');
+    if (timer) clearTimerout(timer);
+    timer = setTimeout(function () {
+      card.setAttribute('class', '');
+      timer = null;
+    }, 1000);
+  });
+
+}());
